@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../static/css/style.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../static/js/script.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <meta charset="UTF-8"/>
+    <title>TCC - Marina Souza</title>
+</head>
+<body>
+    <header>
+        <span>Sistema de cultivo hidropônico:<p class="subtitulo"> Controle</span>
+    </header>
+    <hr>
+    <div class="container">
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header"><a> manual </a></div>
+                <div class="collapsible-body sub">
+                <ul class="collapsible">
+                    {% for item in acionadores %}
+                    <li>
+                        <div class="collapsible-header">
+                            <a> {{ item.nome }} </a>
+                            <a class="waves-effect blue-grey lighten-2 btn-small" onclick="request_url('{{ item.id }}')">acionar</a>
+                            <span class="api-message" data-id="{{ item.id }}"></span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </li>
+            <li>
+                <div onclick="atualiza_parametros('{{sistema.ativo}}')" class="collapsible-header"><a> automático </a></div>
+                <div class="collapsible-body sub">
+                    <div class="row">
+                        <form>
+                            <div class="row auto">
+                                <div class="input-field row-automatico">
+                                    <input placeholder="Insira aqui o valor da condutividade" value="{{sistema.condutividade}}" step="0.1" id="auto-condutividade" type="number" class="validate">
+                                    <label for="first_name">Condutividade</label>
+                                </div>
+                                <div class="switch">
+                                    <label>
+                                      Off
+                                      <input id="auto-switch" type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                </div>
+                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><a> alertas </a></div>
+                <div class="collapsible-body sub">
+                    <div class="row">
+                        <form>
+                            <div class="row auto">
+                                <div class="input-field row-automatico">
+                                    <input placeholder="Insira aqui o valor da condutividade" step="0.1" id="auto-condutividade" type="number" class="validate">
+                                    <label for="first_name">Condutividade</label>
+                                </div>
+                                <div class="switch">
+                                    <label>
+                                      Off
+                                      <input type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                </div>
+                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form>
+                            <div class="row auto">
+                                <div class="input-field row-automatico">
+                                    <input placeholder="Insira aqui o valor da umidade" step="0.1" id="auto-condutividade" type="number" class="validate">
+                                    <label for="first_name">Umidade</label>
+                                </div>
+                                <div class="switch">
+                                    <label>
+                                      Off
+                                      <input type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                </div>
+                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><a> sensores </a></div>
+                <div class="collapsible-body sub">
+                <ul class="collapsible">
+                    {% for item in sensores %}
+                    <li>
+                        <div class="collapsible-header">
+                            <a> {{ item }} </a>
+                            <div class="input-field row-automatico">
+                                <input type="number" >
+                                <label for="first_name">Valor</label>
+                            </div>
+                            <a class="waves-effect blue-grey lighten-2 btn-small">inserir</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <div class="collapsible-header"><a> historico </a></div>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+    {{sistema}}
+    </footer>
+</body>
+<script>
+M.AutoInit();
+</script>
+</html>
