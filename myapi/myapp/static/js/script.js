@@ -18,6 +18,45 @@ function atualiza_parametros(param) {
     $('#auto-switch').prop('checked', param=='True');
 }
 
-function acionamento_manual(){
-    var switchState = ($("input['name'='switch.auto']").is(":checked"))? true : false
+function automatico_condutividade() {
+    const switchState = ($("#auto-switch").is(":checked"))? true : false
+    const inputValue = $("#auto-input").val()
+    const data = {
+        condutividade: inputValue,
+        ativo: switchState
+    }
+
+    $.ajax({
+        method: 'GET',
+        url: '/condutividade/',
+        dataType: 'json',
+        data: data
+    }).done(function( msg ) {
+        alert(msg);
+    }).error(function() {
+        alert('Erro');
+    });
+}
+function alarme(param) {
+    const row = param.parentElement;
+    debugger;
+    const switchState = $(row).find('.switch > label > input').is(":checked") ? true : false
+    const inputValue = $(row).find('.input-field > input').val()
+    const alertType = row.dataset.type;
+    const data = {
+        valor: inputValue,
+        ativo: switchState,
+        tipo: alertType
+    }
+
+    $.ajax({
+        method: 'GET',
+        url: '/alerta/',
+        dataType: 'json',
+        data: data
+    }).done(function( msg ) {
+        //alert(msg);
+    }).error(function() {
+        //alert('Erro');
+    });
 }

@@ -6,10 +6,10 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="../static/css/style.css" type="text/css" rel="stylesheet"/>
-    <script type="text/javascript" src="../static/js/script.js"></script>
     <!-- Compiled and minified JavaScript -->
     <!-- Compiled and minified JavaScript -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <meta charset="UTF-8"/>
     <title>TCC - Marina Souza</title>
@@ -44,7 +44,7 @@
                         <form>
                             <div class="row auto">
                                 <div class="input-field row-automatico">
-                                    <input placeholder="Insira aqui o valor da condutividade" value="{{sistema.condutividade}}" step="0.1" id="auto-condutividade" type="number" class="validate">
+                                    <input min="0" max="10"placeholder="Insira aqui o valor da condutividade" value="{{sistema.condutividade}}" step="0.1" id="auto-input" type="number" class="validate">
                                     <label for="first_name">Condutividade</label>
                                 </div>
                                 <div class="switch">
@@ -55,7 +55,7 @@
                                       On
                                     </label>
                                 </div>
-                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                                <a class="waves-effect blue-grey lighten-2 btn-small" onclick="automatico_condutividade()">atualizar</a>
                             </div>
                         </form>
                     </div>
@@ -66,9 +66,9 @@
                 <div class="collapsible-body sub">
                     <div class="row">
                         <form>
-                            <div class="row auto">
-                                <div class="input-field row-automatico">
-                                    <input placeholder="Insira aqui o valor da condutividade" step="0.1" id="auto-condutividade" type="number" class="validate">
+                            <div class="row auto" data-type="condutividade">
+                                <div class="input-field alerta row-automatico">
+                                    <input placeholder="Insira aqui o valor da condutividade" min="0" step="0.1" type="number" class="validate">
                                     <label for="first_name">Condutividade</label>
                                 </div>
                                 <div class="switch">
@@ -79,15 +79,15 @@
                                       On
                                     </label>
                                 </div>
-                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                                <a class="waves-effect blue-grey lighten-2 btn-small" onclick="alarme(this)" type="alerta""> atualizar</a>
                             </div>
                         </form>
                     </div>
                     <div class="row">
                         <form>
-                            <div class="row auto">
+                            <div class="row auto" data-type="umidade"">
                                 <div class="input-field row-automatico">
-                                    <input placeholder="Insira aqui o valor da umidade" step="0.1" id="auto-condutividade" type="number" class="validate">
+                                    <input placeholder="Insira aqui o valor da umidade" step="0.1" min="0" type="number" class="validate">
                                     <label for="first_name">Umidade</label>
                                 </div>
                                 <div class="switch">
@@ -98,7 +98,7 @@
                                       On
                                     </label>
                                 </div>
-                                <a class="waves-effect blue-grey lighten-2 btn-small">atualizar</a>
+                                <a class="waves-effect blue-grey lighten-2 btn-small" onclick="alarme(this)">atualizar</a>
                             </div>
                         </form>
                     </div>
@@ -129,7 +129,6 @@
     </div>
     <hr>
     <footer>
-    {{sistema}}
     </footer>
 </body>
 <script>

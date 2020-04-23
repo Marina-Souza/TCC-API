@@ -56,8 +56,9 @@ class Alertas(models.Model):
     class Meta:
         db_table = 'alertas'
 
-    idDispositivo = models.ForeignKey(Dispositivos, on_delete=models.CASCADE)
-    limiar = models.IntegerField()
+    idDispositivo = models.CharField(max_length=20, null=True) #models.ForeignKey(Dispositivos, on_delete=models.CASCADE)
+    limiar = models.FloatField(null=True) 
+    tipo = models.CharField(max_length=20, default='condutividade')
     ativo = models.BooleanField(default=True)
 
     def __str__(self):

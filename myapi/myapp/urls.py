@@ -10,6 +10,6 @@ urlpatterns = [
     path('manual/', views.manual),
     path('manual/<pk>/<time>/', views.registra_acionamento),
     path('cadastro/<tipo>/<nome>/<GPIO>', views.registra_dispositivo), #tipo: sensor ou acionador 
-    path('condutividade/<limiar>', views.atualiza_condutividade),
-    path('alerta/<pk>/<limiar>/<ativo>', views.registra_alerta), #parametro: umidade ou condutividade
+    path('condutividade/', views.atualiza_condutividade),
+    path('alerta/', views.registra_alerta), #parametro: umidade ou condutividade
 ]

@@ -24,18 +24,20 @@ def registra_dispositivo(request, tipo, nome, GPIO):
     dispositivo.save()
     return JsonResponse({'nome': nome, 'GPIOPort': GPIO}, safe=False, status=status.HTTP_200_OK)
 
-def atualiza_condutividade(request, limiar):
+def atualiza_condutividade(request):
     sistema, created = Sistema.objects.get_or_create(id=1)
-    sistema.condutividade = float(limiar)
+    sistema.condutividade = float(request.GET["condutividade"])
     sistema.vazao = 1
     sistema.cronIrrigacao = '* * * * *'
-    sistema.umidade = '30'
+    sistema.umidade = '70'
+    sistema.ativo = request.GET["ativo"] == 'true'
     sistema.save()
-    return JsonResponse({'nome': 'condutividade', 'valor': limiar}, safe=False, status=status.HTTP_200_OK)
+    return JsonResponse({'status': 'sucesso'}, safe=False, status=status.HTTP_200_OK)
 
-def registra_alerta(request, pk, limiar, ativo):
-    dispositivo = Dispositivos.objects.get(id=int(pk))
-    alerta = Alertas(idDispositivo=dispositivo, limiar=limiar, ativo=ativo)
+def registra_alerta(request):
+    alerta, created = Alertas.objects.get_or_create(tipo=request.GET['tipo'])
+    alerta.limiar = request.GET['valor']
+    alerta.ativo = request.GET['valor'] == 'true'
     alerta.save()
     return JsonResponse({'nome': 'condutividade', 'valor': 'limiar'}, safe=False, status=status.HTTP_200_OK)
 
@@ -55,10 +57,6 @@ def manual(request):
 
 class index(generics.ListCreateAPIView):
     queryset = Dispositivos.objects.all()
-
-class MusicList(generics.ListCreateAPIView):
-    queryset = Music.objects.all()
-    serializer_class = MusicSerializer
 
 class ListarDispositivos(generics.ListCreateAPIView):
     queryset = Dispositivos.objects.all()
