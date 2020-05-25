@@ -49,8 +49,8 @@ def get_values(queryList):
 def home(request):
     acionadores = Dispositivos.objects.filter(tipo='acionador').values()
     sensores = Dispositivos.objects.filter(tipo='sensor')
-    sistema = list(Sistema.objects.filter(id=1).values())[0]
-    return render(request, 'home.html', {'acionadores': acionadores, 'sensores': sensores, 'sistema': sistema})
+    #sistema = list(Sistema.objects.filter(id=1).values())[0] or ''
+    return render(request, 'home.html', {'acionadores': acionadores, 'sensores': sensores}  )
 
 def manual(request):
     return JsonResponse({'nome': 'UHUL'}, safe=False, status=status.HTTP_200_OK)
